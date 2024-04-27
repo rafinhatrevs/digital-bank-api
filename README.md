@@ -12,7 +12,7 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 - **bancodedados.js:** Arquivo que contém a estrutura de dados do banco, incluindo informações como nome do banco, número da agência, e as listas de contas, saques, depósitos e transferências.
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
-- **rotas.js:** Arquivo que contém as definições das rotas da API
+- **rotas.js:** Arquivo que contém as definições das rotas da API.
   
 ### controladores/:
 - **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
