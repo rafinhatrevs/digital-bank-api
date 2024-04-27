@@ -14,12 +14,12 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
   
-### controladores/:
+#### controladores/:
 - **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
 - **transacoes.js:** Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
 - **consultas.js:** Controlador para consultas bancárias, como verificar saldo e extrato.
   
-### intermediários/:
+#### intermediários/:
 - **autenticacao.js:** Intermediário para autenticar a senha do banco antes de acessar a lista de contas.
 - **validacoes.js:** Intermediário para realizar validações antes de executar operações bancárias.
 
@@ -37,12 +37,12 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 - [x] **Conferir Saldo:** Endpoint para consultar o saldo de uma conta bancária.
 - [x] **Extrato:** Endpoint para obter o extrato de uma conta bancária.
 
+<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
+
 ### 🛠 Tecnologias Utilizadas
 
-**Node.js:** Ambiente de execução JavaScript.
-
-**Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
-
-**Nodemon:** Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
+- **Node.js:** Ambiente de execução JavaScript.
+- **Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
+- **Nodemon:** Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
