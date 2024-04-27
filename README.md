@@ -39,7 +39,7 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ### 🛠 Tecnologias Utilizadas
 
-**Node.js:** Ambiente de execução JavaScript que utiliza o motor V8 do Google Chrome.
+**Node.js:** Ambiente de execução JavaScript.
 
 **Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
 
