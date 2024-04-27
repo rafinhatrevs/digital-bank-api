@@ -27,20 +27,20 @@ Projeto desenvolvido durante a 16 de Desenvolvimento de Software | Back-End ofer
 
 # ⚙️ Funcionalidades
 
-- [x] Listar Contas: Endpoint para listar todas as contas bancárias cadastradas.
-- [x] Criar Conta: Endpoint para criar uma nova conta bancária.
-- [x] Atualizar Conta: Endpoint para atualizar informações de uma conta bancária existente.
-- [x] Excluir Conta: Endpoint para excluir uma conta bancária.
-- [x] Depositar: Endpoint para realizar um depósito em uma conta bancária.
-- [x] Sacar: Endpoint para realizar um saque de uma conta bancária.
-- [x] Transferir: Endpoint para realizar uma transferência entre contas.
-- [x] Conferir Saldo: Endpoint para consultar o saldo de uma conta bancária.
-- [x] Extrato: Endpoint para obter o extrato de uma conta bancária.
+- [x] *Listar Contas:* Endpoint para listar todas as contas bancárias cadastradas.
+- [x] *Criar Conta:* Endpoint para criar uma nova conta bancária.
+- [x] *Atualizar Conta:* Endpoint para atualizar informações de uma conta bancária existente.
+- [x] *Excluir Conta:* Endpoint para excluir uma conta bancária.
+- [x] *Depositar:* Endpoint para realizar um depósito em uma conta bancária.
+- [x] *Sacar:* Endpoint para realizar um saque de uma conta bancária.
+- [x] *Transferir:* Endpoint para realizar uma transferência entre contas.
+- [x] *Conferir Saldo:* Endpoint para consultar o saldo de uma conta bancária.
+- [x] *Extrato:* Endpoint para obter o extrato de uma conta bancária.
 
 # 🛠 Tecnologias Utilizadas
 
-### Node.js: Ambiente de execução JavaScript que utiliza o motor V8 do Google Chrome.
-### Express.js: Framework web para Node.js utilizado para criar a API RESTful.
-### Nodemon: Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
+*Node.js:* Ambiente de execução JavaScript que utiliza o motor V8 do Google Chrome.
+*Express.js:* Framework web para Node.js utilizado para criar a API RESTful.
+*Nodemon:* Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
