@@ -8,7 +8,7 @@ Projeto desenvolvido durante a 16 de Desenvolvimento de Software | Back-End ofer
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
-##  💻 Estrutura do Projeto
+###  💻 Estrutura do Projeto
 
 - bancodedados.js: Arquivo que contém a estrutura de dados do banco, incluindo informações como nome do banco, número da agência, e as listas de contas, saques, depósitos e transferências.
 - index.js: Arquivo principal da aplicação que configura o servidor Express e as rotas.
@@ -25,7 +25,7 @@ Projeto desenvolvido durante a 16 de Desenvolvimento de Software | Back-End ofer
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
-## ⚙️ Funcionalidades
+### ⚙️ Funcionalidades
 
 - [x] **Listar Contas:** Endpoint para listar todas as contas bancárias cadastradas.
 - [x] **Criar Conta:** Endpoint para criar uma nova conta bancária.
@@ -37,7 +37,7 @@ Projeto desenvolvido durante a 16 de Desenvolvimento de Software | Back-End ofer
 - [x] **Conferir Saldo:** Endpoint para consultar o saldo de uma conta bancária.
 - [x] **Extrato:** Endpoint para obter o extrato de uma conta bancária.
 
-## 🛠 Tecnologias Utilizadas
+### 🛠 Tecnologias Utilizadas
 
 **Node.js:** Ambiente de execução JavaScript que utiliza o motor V8 do Google Chrome.
 
