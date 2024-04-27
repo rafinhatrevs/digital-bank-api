@@ -29,7 +29,7 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 - [x] **Listar Contas:** Endpoint para listar todas as contas bancárias cadastradas.
 - [x] **Criar Conta:** Endpoint para criar uma nova conta bancária.
-- [x] **Atualizar Conta:** Endpoint para atualizar informações de uma conta bancária existente.
+- [x] **Atualizar Conta:** Endpoint para atualizar informações do usuário de uma conta bancária existente.
 - [x] **Excluir Conta:** Endpoint para excluir uma conta bancária.
 - [x] **Depositar:** Endpoint para realizar um depósito em uma conta bancária.
 - [x] **Sacar:** Endpoint para realizar um saque de uma conta bancária.
