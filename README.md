@@ -10,18 +10,18 @@ Projeto desenvolvido durante a 16 de Desenvolvimento de Software | Back-End ofer
 
 ###  💻 Estrutura do Projeto
 
-- bancodedados.js: Arquivo que contém a estrutura de dados do banco, incluindo informações como nome do banco, número da agência, e as listas de contas, saques, depósitos e transferências.
-- index.js: Arquivo principal da aplicação que configura o servidor Express e as rotas.
-- rotas.js: Arquivo que contém as definições das rotas da API
+- **bancodedados.js:** Arquivo que contém a estrutura de dados do banco, incluindo informações como nome do banco, número da agência, e as listas de contas, saques, depósitos e transferências.
+- **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
+- **rotas.js:** Arquivo que contém as definições das rotas da API
   
 ### controladores/:
-- contas.js: Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
-- transacoes.js: Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
-- consultas.js: Controlador para consultas bancárias, como verificar saldo e extrato.
+- **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
+- **transacoes.js:** Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
+- **consultas.js:** Controlador para consultas bancárias, como verificar saldo e extrato.
   
 ### intermediários/:
-- autenticacao.js: Intermediário para autenticar a senha do banco antes de acessar a lista de contas.
-- validacoes.js: Intermediário para realizar validações antes de executar operações bancárias.
+- **autenticacao.js:** Intermediário para autenticar a senha do banco antes de acessar a lista de contas.
+- **validacoes.js:** Intermediário para realizar validações antes de executar operações bancárias.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
