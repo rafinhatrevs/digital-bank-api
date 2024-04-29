@@ -103,22 +103,22 @@ $ npm run dev
 
 // POST /contas
 {
- 		"nome": "nome",
-   	"cpf": "01234567890",
-    "data_nascimento": "2020-10-24",
-    "telefone": "71999999999",
-    "email": "nome@email.com",
-    "senha": "123456"
+	"nome": "nome",
+	"cpf": "01234567890",
+	"data_nascimento": "2020-10-24",
+	"telefone": "71999999999",
+	"email": "nome@email.com",
+	"senha": "123456"
 }
 
 // PUT /contas/:numeroConta/usuario
 {
- 		"nome": "nome",
-   	"cpf": "01234567890",
-    "data_nascimento": "2020-10-24",
-    "telefone": "71999999999",
-    "email": "nome@email.com",
-    "senha": "123456"
+	"nome": "nome",
+	"cpf": "01234567890",
+	"data_nascimento": "2020-10-24",
+	"telefone": "71999999999",
+	"email": "nome@email.com",
+	"senha": "123456"
 }
 
 // POST /transacoes/depositar
@@ -132,7 +132,7 @@ $ npm run dev
 {
 	"numero_conta": "2",
 	"valor": 10000,
-  "senha": "123456"
+	"senha": "123456"
 }
 
 // POST /transacoes/transferir
