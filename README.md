@@ -111,6 +111,10 @@ $ npm run dev
 	"senha": "123456"
 }
 
+```
+
+```javascript
+
 // PUT /contas/:numeroConta/usuario
 {
 	"nome": "nome",
@@ -121,6 +125,10 @@ $ npm run dev
 	"senha": "123456"
 }
 
+```
+
+```javascript
+
 // POST /transacoes/depositar
 {
 	"numero_conta": "2",
@@ -128,12 +136,20 @@ $ npm run dev
 	"senha": "123456"
 }
 
+```
+
+```javascript
+
 // POST /transacoes/sacar
 {
 	"numero_conta": "2",
 	"valor": 10000,
 	"senha": "123456"
 }
+
+```
+
+```javascript
 
 // POST /transacoes/transferir
 {
