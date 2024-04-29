@@ -1,4 +1,4 @@
-const autenticacao = (req, res, next) => {
+const autenticacao = async (req, res, next) => {
     const { senha_banco } = req.query;
 
     if (!senha_banco) {
