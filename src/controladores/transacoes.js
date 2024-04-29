@@ -2,7 +2,8 @@ const fs = require('fs/promises');
 const bancodedados = require('../bancodedados');
 
 const momento = async () => {
-    return new Date();
+    const data_hora_atual = new Date();
+    return data_hora_atual.toISOString();
 };
 
 const depositar = async (req, res) => {
