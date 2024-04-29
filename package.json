@@ -1,0 +1,18 @@
+{
+  "name": "digital-bank-api",
+  "version": "1.0.0",
+  "description": "Desafio DDS M02 - API Banco Digital",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
