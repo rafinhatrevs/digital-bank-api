@@ -55,7 +55,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/rafinhatrevs/digital-bank-api.git
+$ git clone git@github.com:rafinhatrevs/digital-bank-api.git
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd digital-bank-api
