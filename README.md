@@ -27,23 +27,23 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ### ⚙️ Funcionalidades
 
-- **Listar Contas:**
+- **Listar Contas:**  
   Endpoint para listar todas as contas bancárias cadastradas.
-- **Criar Conta:**
+- **Criar Conta:**  
   Endpoint para criar uma nova conta bancária.
-- **Atualizar Conta:**
+- **Atualizar Conta:**  
   Endpoint para atualizar informações do usuário de uma conta bancária existente.
-- **Excluir Conta:**
+- **Excluir Conta:**  
   Endpoint para excluir uma conta bancária.
-- **Depositar:**
+- **Depositar:**  
   Endpoint para realizar um depósito em uma conta bancária.
-- **Sacar:**
+- **Sacar:**  
   Endpoint para realizar um saque de uma conta bancária.
-- **Transferir:**
+- **Transferir:**  
   Endpoint para realizar uma transferência entre contas.
-- **Conferir Saldo:**
+- **Conferir Saldo:**  
   Endpoint para consultar o saldo de uma conta bancária.
-- **Extrato:**
+- **Extrato:**  
   Endpoint para obter o extrato de uma conta bancária.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
