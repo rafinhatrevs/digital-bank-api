@@ -55,10 +55,10 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 ```bash
 
 # Clone este repositório
-$ git clone git@github.com:seu-usuario/seu-repositorio.git
+$ git clone https://github.com/rafinhatrevs/digital-bank-api.git
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd seu-repositorio
+$ cd digital-bank-api
 
 # Instale as dependências
 $ npm install
