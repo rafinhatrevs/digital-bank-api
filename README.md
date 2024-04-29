@@ -41,23 +41,23 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ### ⚙️ Funcionalidades
 
-- **Listar Contas:**  
+- **Listar Contas:**  `GET` `/contas?senha_banco=Cubos123Bank`  
   Endpoint para listar todas as contas bancárias cadastradas.
-- **Criar Conta:**  
+- **Criar Conta:**  `POST` `/contas`  
   Endpoint para criar uma nova conta bancária.
-- **Atualizar Conta:**  
+- **Atualizar Conta:**  `PUT` `/contas/:numeroConta/usuario`  
   Endpoint para atualizar informações do usuário de uma conta bancária existente.
-- **Excluir Conta:**  
+- **Excluir Conta:**  `DELETE` `/contas/:numeroConta`  
   Endpoint para excluir uma conta bancária.
-- **Depositar:**  
+- **Depositar:**  `POST` `/transacoes/depositar`  
   Endpoint para realizar um depósito em uma conta bancária.
-- **Sacar:**  
+- **Sacar:**  `POST` `/transacoes/sacar`  
   Endpoint para realizar um saque de uma conta bancária.
-- **Transferir:**  
+- **Transferir:**  `POST` `/transacoes/transferir`  
   Endpoint para realizar uma transferência entre contas.
-- **Conferir Saldo:**  
+- **Conferir Saldo:**  `GET` `/contas/saldo?numero_conta=123&senha=123`  
   Endpoint para consultar o saldo de uma conta bancária.
-- **Extrato:**  
+- **Extrato:**  `GET` `/contas/extrato?numero_conta=123&senha=123`  
   Endpoint para obter o extrato de uma conta bancária.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
@@ -96,6 +96,71 @@ $ npm run dev
 <p align="center">
   <a href="https://insomnia.rest/run/?label=&uri=https%3A%2F%2Fraw.githubusercontent.com%2Frafinhatrevs%2Fdigital-bank-api-insomnia%2Fmain%2FInsomnia_2024-04-28.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
+
+#### Exemplos de requisições (Body JSON)
+
+```javascript
+
+// POST /contas
+{
+	"nome": "nome",
+	"cpf": "01234567890",
+	"data_nascimento": "2020-10-24",
+	"telefone": "71999999999",
+	"email": "nome@email.com",
+	"senha": "123456"
+}
+
+```
+
+```javascript
+
+// PUT /contas/:numeroConta/usuario
+{
+	"nome": "nome",
+	"cpf": "01234567890",
+	"data_nascimento": "2020-10-24",
+	"telefone": "71999999999",
+	"email": "nome@email.com",
+	"senha": "123456"
+}
+
+```
+
+```javascript
+
+// POST /transacoes/depositar
+{
+	"numero_conta": "2",
+	"valor": 30000,
+	"senha": "123456"
+}
+
+```
+
+```javascript
+
+// POST /transacoes/sacar
+{
+	"numero_conta": "2",
+	"valor": 10000,
+	"senha": "123456"
+}
+
+```
+
+```javascript
+
+// POST /transacoes/transferir
+{
+	"numero_conta_origem": "1",
+	"numero_conta_destino": "2",
+	"valor": 5000,
+	"senha": "123456"
+}
+
+```
+
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
