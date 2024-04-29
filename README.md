@@ -1,6 +1,18 @@
 ### digital-bank-api
 Desafio DDS M02 - API Banco Digital
 
+<p align="center">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rafinhatrevs/digital-bank-api">
+  
+  <a href="https://github.com/rafinhatrevs/digital-bank-api/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/rafinhatrevs/digital-bank-api">
+  </a>
+  
+  <a href="https://www.linkedin.com/in/rafaellatrevizan/">
+    <img alt="Feito por Rafaella Trevizan" src="https://img.shields.io/badge/feito-por%20Rafaella%20Trevizan-D818A5">
+  </a>
+</p>   
+
 # API do Cubos Bank
 
 Esta é uma API para um banco digital chamado Cubos Bank. O objetivo desta API é fornecer funcionalidades bancárias básicas, como criação de contas, transações e consultas de saldo e extrato.
