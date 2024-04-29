@@ -80,11 +80,11 @@ const transferir = async (req, res) => {
     });
 
     if (conta_origem === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária de origem não encontada!" });
+        return res.status(404).json({ "mensagem": "Conta bancária de origem não encontrada!" });
     }
 
     if (conta_destino === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária de destino não encontada!" });
+        return res.status(404).json({ "mensagem": "Conta bancária de destino não encontrada!" });
     }
 
     if (conta_destino === conta_origem) {

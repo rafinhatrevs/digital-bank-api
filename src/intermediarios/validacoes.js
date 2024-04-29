@@ -12,7 +12,7 @@ const validarDadosConta = async (req, res, next) => {
     });
 
     if (conta_encontrada === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária não encontada!" });
+        return res.status(404).json({ "mensagem": "Conta bancária não encontrada!" });
     }
 
     req.contas = conta_encontrada;
@@ -67,7 +67,7 @@ const validarDadosTransacao = async (req, res, next) => {
     });
 
     if (conta_encontrada === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária não encontada!" });
+        return res.status(404).json({ "mensagem": "Conta bancária não encontrada!" });
     }
 
     if (valor <= 0) {
@@ -94,7 +94,7 @@ const validarDadosConsulta = async (req, res, next) => {
     });
 
     if (conta_encontrada === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária não encontada!" });
+        return res.status(404).json({ "mensagem": "Conta bancária não encontrada!" });
     }
 
     if (senha !== bancodedados.contas[conta_encontrada].usuario.senha) {
