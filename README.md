@@ -11,6 +11,8 @@ Desafio DDS M02 - API Banco Digital
   <a href="https://www.linkedin.com/in/rafaellatrevizan/">
     <img alt="Feito por Rafaella Trevizan" src="https://img.shields.io/badge/feito-por%20Rafaella%20Trevizan-D818A5">
   </a>
+
+  <img alt="Status Em Desenvolvimento" src="https://img.shields.io/badge/STATUS-EM%20DESENVOLVIMENTO-green">
 </p>   
 
 # API do Cubos Bank
