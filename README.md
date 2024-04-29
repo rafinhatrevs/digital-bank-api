@@ -71,7 +71,7 @@ $ npm run dev
 ```
 
 <p align="center">
-  <a href="https://github.com/cubos-academy/academy-template-readme-projects" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://insomnia.rest/run/?label=&uri=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1EKINulTHqiPGwGX_8hjZJeDVyB3UNc8o%2Fview%3Fusp%3Dsharing" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
