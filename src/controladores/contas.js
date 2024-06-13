@@ -1,50 +1,46 @@
-const fs = require('fs/promises');
-const bancodedados = require('../bancodedados');
+const pool = require('../conexao');
+const bcrypt = require('bcrypt');
 
 const listarContas = async (req, res) => {
-    const contas = bancodedados.contas;
+    try {
+        const { rows } = await pool.query(`SELECT id, nome, cpf, data_nascimento, telefone, email, saldo FROM contas`);
 
-    return res.status(200).json({ contas });
+        const contas = rows;
+
+        return res.status(200).json(contas);
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+    }
 };
 
 const criarConta = async (req, res) => {
     const { nome, cpf, data_nascimento, telefone, email, senha } = req.body;
 
-    try {
-        let ultimo_numero_conta = 0;
+    if (!nome || !cpf || !data_nascimento || !telefone || !email || !senha) {
+        return res.status(400).json({ mensagem: 'Todos os campos obrigatórios devem ser informados.' });
+    }
 
-        if (bancodedados.contas.length > 0) {
-            ultimo_numero_conta = parseInt(bancodedados.contas[bancodedados.contas.length - 1].numero_conta);
+    try {
+        const { rowCount } = await pool.query(`SELECT * FROM contas WHERE cpf = $1 OR email = $2`, [cpf, email]);
+
+        if (rowCount > 0) {
+            return res.status(400).json({ mensagem: 'Já existe uma conta com os dados informados.' });
         }
 
-        const numero_conta = ultimo_numero_conta + 1;
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        const conta = {
-            numero_conta: String(numero_conta),
-            saldo_conta: 0,
-            usuario: {
-                nome,
-                cpf,
-                data_nascimento,
-                telefone,
-                email,
-                senha
-            }
-        };
-
-        bancodedados.contas.push(conta);
-
-        const dados_string = `module.exports = ${JSON.stringify(bancodedados)}`;
-
-        await fs.writeFile('./src/bancodedados.js', dados_string);
+        await pool.query(`INSERT INTO contas (nome, cpf, data_nascimento, telefone, email, senha)
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada]);
 
         return res.status(201).send();
-    } catch (erro) {
-        return res.status(500).json({ "erro": erro.message });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
 
-const atualizarUsuarioConta = async (req, res) => {
+/*const atualizarUsuarioConta = async (req, res) => {
     const conta_encontrada = req.contas;
     const { nome, cpf, data_nascimento, telefone, email, senha } = req.body;
 
@@ -84,11 +80,9 @@ const excluirConta = async (req, res) => {
     } catch (erro) {
         return res.status(500).json({ "erro": erro.message });
     }
-};
+};*/
 
 module.exports = {
     listarContas,
     criarConta,
-    atualizarUsuarioConta,
-    excluirConta
 };
