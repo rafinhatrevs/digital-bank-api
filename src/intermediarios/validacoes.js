@@ -1,4 +1,4 @@
-const bancodedados = require('../bancodedados');
+/*const bancodedados = require('../bancodedados');
 
 const validarDadosConta = async (req, res, next) => {
     const { numeroConta } = req.params;
@@ -111,4 +111,4 @@ module.exports = {
     validarDadosUsuario,
     validarDadosTransacao,
     validarDadosConsulta
-};
+};*/

@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+/*const fs = require('fs/promises');
 const bancodedados = require('../bancodedados');
 
 const momento = async () => {
@@ -133,4 +133,4 @@ module.exports = {
     depositar,
     sacar,
     transferir
-};
+};*/

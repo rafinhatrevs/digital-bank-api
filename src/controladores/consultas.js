@@ -1,4 +1,4 @@
-const bancodedados = require('../bancodedados');
+/*const bancodedados = require('../bancodedados');
 
 const exibirSaldo = async (req, res) => {
     const conta_encontrada = req.contas_consultas;
@@ -40,4 +40,4 @@ const exibirExtrato = async (req, res) => {
 module.exports = {
     exibirSaldo,
     exibirExtrato
-};
+};*/
