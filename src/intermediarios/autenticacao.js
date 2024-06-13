@@ -1,15 +1,33 @@
+const pool = require('../conexao');
+const jwt = require('jsonwebtoken');
+const config = require('../configs');
+
 const autenticacao = async (req, res, next) => {
-    const { senha_banco } = req.query;
+    const { authorization } = req.headers;
 
-    if (!senha_banco) {
-        return res.status(401).json({ "mensagem": "A senha deve ser informada." });
+    if (!authorization) {
+        return res.status(401).json({ mensagem: 'Para acessar este recurso um token de autenticação válido deve ser enviado.' });
     }
 
-    if (senha_banco !== 'Cubos123Bank') {
-        return res.status(401).json({ "mensagem": "A senha do banco informada é inválida!" });
-    }
+    const token = authorization.split(' ')[1];
 
-    next();
+    try {
+        const { id } = jwt.verify(token, config.jwtSecret);
+
+        const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [id]);
+
+        if (rowCount === 0) {
+            return res.status(401).json({ mensagem: 'Para acessar este recurso um token de autenticação válido deve ser enviado.' });
+        }
+
+        const conta = rows[0];
+
+        req.conta = conta;
+
+        next();
+    } catch (error) {
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+    }
 };
 
 module.exports = autenticacao;
