@@ -35,6 +35,8 @@ ADD saldo NUMERIC DEFAULT 0;
 ALTER TABLE contas
 ALTER COLUMN senha TYPE VARCHAR;
 
+ALTER TABLE contas
+ADD saldo integer;
 
 
 

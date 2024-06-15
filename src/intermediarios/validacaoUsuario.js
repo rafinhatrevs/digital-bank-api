@@ -2,7 +2,7 @@ const pool = require('../conexao');
 const jwt = require('jsonwebtoken');
 const config = require('../configs');
 
-const autenticacao = async (req, res, next) => {
+const validarUsuario = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -26,8 +26,9 @@ const autenticacao = async (req, res, next) => {
 
         next();
     } catch (error) {
+        //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
 
-module.exports = autenticacao;
+module.exports = validarUsuario;

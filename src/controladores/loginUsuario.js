@@ -3,11 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../configs');
 
-const login = async (req, res) => {
+const loginUsuario = async (req, res) => {
     const { cpf, senha } = req.body;
-
-    if (!cpf) { return res.status(400).json({ mensagem: 'O campo cpf deve ser informado.' }); }
-    if (!senha) { return res.status(400).json({ mensagem: 'O campo senha deve ser informado.' }); }
 
     try {
         const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE cpf = $1`, [cpf]);
@@ -40,6 +37,4 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = {
-    login
-};
+module.exports = loginUsuario;

@@ -1,17 +1,26 @@
 const express = require('express');
-const autenticacao = require('./intermediarios/autenticacao');
-const { login } = require('./controladores/login');
 
-const { listarContas, criarConta } = require('./controladores/contas');
+// validacoes
+const validarBanco = require('./intermediarios/validacaoBanco');
+const validarUsuario = require('./intermediarios/validacaoUsuario');
+const { dadosConta, dadosLogin } = require('./intermediarios/validacaoDados');
+
+// controladores
+const loginBanco = require('./controladores/loginBanco');
+const loginUsuario = require('./controladores/loginUsuario');
+const { listarContas, criarConta, atualizarConta, excluirConta } = require('./controladores/contas');
 
 const rotas = express();
 
-rotas.post('/contas', criarConta);
-rotas.post('/login', login);
+rotas.post('/banco', loginBanco);
+rotas.post('/contas', dadosConta, criarConta);
+rotas.post('/login', dadosLogin, loginUsuario);
+rotas.get('/contas', validarBanco, listarContas);
 
-rotas.use(autenticacao);
+rotas.use(validarUsuario);
 
-rotas.get('/contas', listarContas);
-
+// rotas contas
+rotas.put('/contas', dadosConta, atualizarConta);
+rotas.delete('/contas', excluirConta);
 
 module.exports = rotas;

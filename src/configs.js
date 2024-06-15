@@ -11,4 +11,10 @@ module.exports = {
     dbName: 'digital_bank',
     dbUser: 'postgres',
     dbPassword: '1234',
+
+    // Dados do Banco
+    bankName: "Cubos Bank",
+    bankNumber: "123",
+    bankAg: "0001",
+    bankPassword: "Cubos123Bank",
 }
