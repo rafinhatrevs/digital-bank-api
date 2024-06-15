@@ -18,7 +18,18 @@ const dadosLogin = async (req, res, next) => {
     next();
 };
 
+const dadosDeposito = async (req, res, next) => {
+    const { valor, numero_conta, data } = req.body;
+
+    if (!valor || !numero_conta || !data) {
+        return res.status(400).json({ mensagem: 'Todos os campos obrigatórios devem ser informados.' });
+    }
+
+    next();
+};
+
 module.exports = {
     dadosConta,
-    dadosLogin
+    dadosLogin,
+    dadosDeposito
 };

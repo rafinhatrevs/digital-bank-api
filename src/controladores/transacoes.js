@@ -1,39 +1,25 @@
-/*const fs = require('fs/promises');
-const bancodedados = require('../bancodedados');
-
-const momento = async () => {
-    const data_hora_atual = new Date();
-    return data_hora_atual.toISOString();
-};
+const pool = require('../conexao');
 
 const depositar = async (req, res) => {
-    const conta_encontrada = req.contas_transacoes
-    const { numero_conta, valor } = req.body;
+    const { valor, numero_conta, data } = req.body;
 
     try {
-        bancodedados.contas[conta_encontrada].saldo_conta += valor;
+        const { rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta]);
 
-        const momento_agora = await momento();
+        if (rowCount === 0) {
+            return res.status(404).json({ mensagem: 'Conta não encontrada.' });
+        }
 
-        const deposito = {
-            data: momento_agora,
-            numero_conta,
-            valor
-        };
+        await pool.query(`INSERT INTO depositos (valor, conta_id, data) VALUES ($1, $2, $3) RETURNING *`, [valor, numero_conta, data]);
 
-        bancodedados.depositos.push(deposito);
-
-        const dados_string = `module.exports = ${JSON.stringify(bancodedados)}`;
-
-        await fs.writeFile('./src/bancodedados.js', dados_string);
-
-        return res.status(204).send();
-    } catch (erro) {
-        return res.status(500).json({ "erro": erro.message });
+        return res.status(201).send();
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
 
-const sacar = async (req, res) => {
+/*const sacar = async (req, res) => {
     const conta_encontrada = req.contas_transacoes;
     const { numero_conta, valor } = req.body;
 
@@ -127,10 +113,8 @@ const transferir = async (req, res) => {
     } catch (erro) {
         return res.status(500).json({ "erro": erro.message });
     }
-};
+};*/
 
 module.exports = {
     depositar,
-    sacar,
-    transferir
-};*/
+};

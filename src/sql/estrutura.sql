@@ -36,8 +36,13 @@ ALTER TABLE contas
 ALTER COLUMN senha TYPE VARCHAR;
 
 ALTER TABLE contas
-ADD saldo integer;
+ALTER COLUMN saldo TYPE integer;
 
+ALTER TABLE depositos
+ADD data date;
 
+ALTER TABLE saques
+ADD data date;
 
-
+ALTER TABLE transferencias
+ADD data date;
