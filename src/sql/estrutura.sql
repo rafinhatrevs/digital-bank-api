@@ -7,42 +7,28 @@ CREATE TABLE contas (
     data_nascimento date NOT NULL,
     telefone varchar NOT NULL,
     email varchar NOT NULL UNIQUE,
-    senha varchar(6) NOT NULL
+    senha varchar NOT NULL,
+    saldo integer
 );
 
 CREATE TABLE depositos (
 	id serial primary key,
     valor integer NOT NULL,
-    conta_id integer NOT NULL references contas(id)
+    conta_id integer NOT NULL references contas(id),
+    data date
 );
 
 CREATE TABLE saques (
 	id serial primary key,
     valor integer NOT NULL,
-    conta_id integer NOT NULL references contas(id)
+    conta_id integer NOT NULL references contas(id),
+    data date
 );
 
 CREATE TABLE transferencias (
 	id serial primary key,
     valor integer NOT NULL,
     conta_origem_id integer NOT NULL references contas(id),
-    conta_destino_id integer NOT NULL references contas(id)
+    conta_destino_id integer NOT NULL references contas(id),
+    data date
 );
-
-ALTER TABLE contas
-ADD saldo NUMERIC DEFAULT 0;
-
-ALTER TABLE contas
-ALTER COLUMN senha TYPE VARCHAR;
-
-ALTER TABLE contas
-ALTER COLUMN saldo TYPE integer;
-
-ALTER TABLE depositos
-ADD data date;
-
-ALTER TABLE saques
-ADD data date;
-
-ALTER TABLE transferencias
-ADD data date;
