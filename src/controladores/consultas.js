@@ -1,43 +1,63 @@
-/*const bancodedados = require('../bancodedados');
+const pool = require('../conexao');
 
-const exibirSaldo = async (req, res) => {
-    const conta_encontrada = req.contas_consultas;
+const saldo = async (req, res) => {
+    try {
+        const idConta = req.conta.id;
 
-    const saldo_conta = bancodedados.contas[conta_encontrada].saldo_conta;
+        const { rows } = await pool.query(`SELECT saldo FROM contas WHERE id = $1`, [idConta]);
 
-    return res.status(200).json({ saldo_conta });
+        const saldo = rows[0];
+
+        return res.status(200).json(saldo);
+
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+    }
 };
 
-const exibirExtrato = async (req, res) => {
-    const { numero_conta } = req.query;
+const extrato = async (req, res) => {
+    try {
+        const idConta = req.conta.id;
 
-    const depositos = bancodedados.depositos.filter((deposito) => {
-        return deposito.numero_conta === numero_conta;
-    });
+        const { rows: depositos } = await pool.query(`SELECT valor, conta_id AS numero_conta, data FROM depositos WHERE conta_id = $1`, [idConta]);
+        const { rows: saques } = await pool.query(`SELECT valor, conta_id AS numero_conta, data FROM saques WHERE conta_id = $1`, [idConta]);
+        const { rows: transferenciasEnviadas } = await pool.query(`
+            SELECT 
+                valor, 
+                conta_origem_id AS numero_conta_origem,  
+                conta_destino_id AS numero_conta_destino,
+                data
+            FROM 
+                transferencias 
+            WHERE 
+                conta_origem_id = $1`, [idConta]);
+        const { rows: transferenciasRecebidas } = await pool.query(`
+            SELECT 
+                valor, 
+                conta_origem_id AS numero_conta_origem,  
+                conta_destino_id AS numero_conta_destino,
+                data
+            FROM 
+                transferencias 
+            WHERE 
+                conta_destino_id = $1`, [idConta]);
 
-    const saques = bancodedados.saques.filter((saque) => {
-        return saque.numero_conta === numero_conta;
-    });
+        const extrato = {
+            depositos,
+            saques,
+            transferencias_enviadas: transferenciasEnviadas,
+            transferencias_recebidas: transferenciasRecebidas
+        };
 
-    const transferencias_enviadas = bancodedados.transferencias.filter((transferencia) => {
-        return transferencia.numero_conta_origem === numero_conta;
-    });
-
-    const transferencias_recebidas = bancodedados.transferencias.filter((transferencia) => {
-        return transferencia.numero_conta_destino === numero_conta;
-    });
-
-    const extrato = {
-        depositos,
-        saques,
-        transferencias_enviadas,
-        transferencias_recebidas
-    };
-
-    return res.status(200).json({ extrato });
+        return res.status(200).json(extrato);
+    } catch (error) {
+        //console.log(error)
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+    }
 };
 
 module.exports = {
-    exibirSaldo,
-    exibirExtrato
-};*/
+    saldo,
+    extrato
+};

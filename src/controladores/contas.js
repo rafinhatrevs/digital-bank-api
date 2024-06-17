@@ -48,8 +48,10 @@ const atualizarConta = async (req, res) => {
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
+        const idConta = req.conta.id;
+
         await pool.query(`UPDATE contas SET nome = $1, cpf = $2, data_nascimento = $3, telefone = $4, email = $5, senha = $6
-            WHERE id = $7`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada, req.conta.id]);
+            WHERE id = $7`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada, idConta]);
 
         return res.status(204).send();
     } catch (error) {
@@ -60,7 +62,9 @@ const atualizarConta = async (req, res) => {
 
 const excluirConta = async (req, res) => {
     try {
-        const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [req.conta.id]);
+        const idConta = req.conta.id;
+
+        const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [idConta]);
 
         if (rowCount === 0) {
             return res.status(404).json({ mensagem: 'Conta não encontrada.' });

@@ -10,6 +10,7 @@ const loginBanco = require('./controladores/loginBanco');
 const loginUsuario = require('./controladores/loginUsuario');
 const { listarContas, criarConta, atualizarConta, excluirConta } = require('./controladores/contas');
 const { depositar, sacar, transferir } = require('./controladores/transacoes');
+const { saldo, extrato } = require('./controladores/consultas');
 
 const rotas = express();
 
@@ -28,5 +29,9 @@ rotas.delete('/contas', excluirConta);
 rotas.post('/transacoes/deposito', dadosTransacao, depositar);
 rotas.post('/transacoes/saque', dadosTransacao, sacar);
 rotas.post('/transacoes/transferencia', dadosTransferencia, transferir);
+
+// rotas consultas
+rotas.get('/contas/saldo', saldo);
+rotas.get('/contas/extrato', extrato);
 
 module.exports = rotas;
