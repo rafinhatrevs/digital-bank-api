@@ -4,117 +4,102 @@ const depositar = async (req, res) => {
     const { valor, numero_conta, data } = req.body;
 
     try {
-        const { rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta]);
+        const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta]);
 
         if (rowCount === 0) {
             return res.status(404).json({ mensagem: 'Conta não encontrada.' });
         }
 
+        const conta = rows[0];
+
         await pool.query(`INSERT INTO depositos (valor, conta_id, data) VALUES ($1, $2, $3) RETURNING *`, [valor, numero_conta, data]);
 
+        const novoSaldo = conta.saldo + valor;
+
+        await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [novoSaldo, numero_conta]);
+
         return res.status(201).send();
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+    }
+};
+
+const sacar = async (req, res) => {
+    const { valor, numero_conta, data } = req.body;
+
+    try {
+        const { rows, rowCount } = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta]);
+
+        if (rowCount === 0) {
+            return res.status(404).json({ mensagem: 'Conta não encontrada.' });
+        }
+
+        const conta = rows[0];
+
+        if (conta.id !== req.conta.id) {
+            return res.status(401).json({ mensagem: 'Conta não pertence ao usuário logado.' });
+        }
+
+        await pool.query(`INSERT INTO saques (valor, conta_id, data) VALUES ($1, $2, $3) RETURNING *`, [valor, numero_conta, data]);
+
+        const novoSaldo = conta.saldo - valor;
+
+        await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [novoSaldo, numero_conta]);
+
+        return res.status(204).send();
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
 
-/*const sacar = async (req, res) => {
-    const conta_encontrada = req.contas_transacoes;
-    const { numero_conta, valor } = req.body;
-
-    if (bancodedados.contas[conta_encontrada].saldo_conta <= 0 || valor > bancodedados.contas[conta_encontrada].saldo_conta) {
-        return res.status(400).json({ "mensagem": "Saldo insuficiente!" });
-    }
+const transferir = async (req, res) => {
+    const { valor, numero_conta_origem, numero_conta_destino, data } = req.body;
 
     try {
-        bancodedados.contas[conta_encontrada].saldo_conta -= valor;
+        const resultadoOrigem = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta_origem]);
+        const contaOrigem = resultadoOrigem.rows[0];
 
-        const momento_agora = await momento();
+        if (!contaOrigem) {
+            return res.status(404).json({ mensagem: 'Conta não encontrada.' });
+        }
 
-        const saque = {
-            data: momento_agora,
-            numero_conta,
-            valor
-        };
+        const resultadoDestino = await pool.query(`SELECT * FROM contas WHERE id = $1`, [numero_conta_destino]);
+        const contaDestino = resultadoDestino.rows[0];
 
-        bancodedados.saques.push(saque);
+        if (!contaDestino) {
+            return res.status(404).json({ mensagem: 'Conta não encontrada.' });
+        }
 
-        const dados_string = `module.exports = ${JSON.stringify(bancodedados)}`;
+        if (contaOrigem.id !== req.conta.id) {
+            return res.status(401).json({ mensagem: 'Conta não pertence ao usuário logado.' });
+        }
 
-        await fs.writeFile('./src/bancodedados.js', dados_string);
+        if (contaOrigem.saldo === 0 || valor > contaOrigem.saldo) {
+            return res.status(400).json({ mensagem: 'Saldo insuficiente!' });
+        }
+
+        await pool.query(`INSERT INTO transferencias (valor, conta_origem_id, conta_destino_id, data) VALUES ($1, $2, $3, $4) RETURNING *`,
+            [valor, numero_conta_origem, numero_conta_destino, data]);
+
+        const saldoOrigem = contaOrigem.saldo - valor;
+
+        await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [saldoOrigem, numero_conta_origem]);
+
+        const saldoDestino = contaDestino.saldo + valor;
+
+        await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [saldoDestino, numero_conta_destino]);
 
         return res.status(204).send();
-    } catch (erro) {
-        return res.status(500).json({ "erro": erro.message });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
 
-const transferir = async (req, res) => {
-    const { numero_conta_origem, numero_conta_destino, valor, senha } = req.body;
-
-    if (!numero_conta_origem) { return res.status(400).json({ "mensagem": "O número da conta de origem deve ser informado." }); }
-    if (!numero_conta_destino) { return res.status(400).json({ "mensagem": "O número da conta de destino deve ser informado." }); }
-    if (!valor) { return res.status(400).json({ "mensagem": "O valor deve ser informado." }); }
-    if (!senha) { return res.status(400).json({ "mensagem": "A senha deve ser informada." }); }
-
-    const conta_origem = bancodedados.contas.findIndex((conta) => {
-        return conta.numero_conta === numero_conta_origem;
-    });
-
-    const conta_destino = bancodedados.contas.findIndex((conta) => {
-        return conta.numero_conta === numero_conta_destino;
-    });
-
-    if (conta_origem === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária de origem não encontrada!" });
-    }
-
-    if (conta_destino === -1) {
-        return res.status(404).json({ "mensagem": "Conta bancária de destino não encontrada!" });
-    }
-
-    if (conta_destino === conta_origem) {
-        return res.status(400).json({ "mensagem": "Conta de destino inválida." });
-    }
-
-    if (valor < 0) {
-        return res.status(400).json({ "mensagem": "O valor não pode ser menor que zero!" });
-    }
-
-    if (senha !== bancodedados.contas[conta_origem].usuario.senha) {
-        return res.status(400).json({ "mensagem": "Senha incorreta." });
-    }
-
-    if (bancodedados.contas[conta_origem].saldo_conta <= 0 || valor > bancodedados.contas[conta_origem].saldo_conta) {
-        return res.status(400).json({ "mensagem": "Saldo insuficiente!" });
-    }
-
-    try {
-        bancodedados.contas[conta_origem].saldo_conta -= valor;
-        bancodedados.contas[conta_destino].saldo_conta += valor;
-
-        const momento_agora = await momento();
-
-        const transferencia = {
-            data: momento_agora,
-            numero_conta_origem,
-            numero_conta_destino,
-            valor
-        };
-
-        bancodedados.transferencias.push(transferencia);
-
-        const dados_string = `module.exports = ${JSON.stringify(bancodedados)}`;
-
-        await fs.writeFile('./src/bancodedados.js', dados_string);
-
-        return res.status(204).send();
-    } catch (erro) {
-        return res.status(500).json({ "erro": erro.message });
-    }
-};*/
-
 module.exports = {
     depositar,
+    sacar,
+    transferir
 };
