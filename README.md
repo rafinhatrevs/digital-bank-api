@@ -27,7 +27,7 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
 - **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando pool de conexões.
-- **config.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
+- **configs.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
   
 #### controladores/:
 - **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
