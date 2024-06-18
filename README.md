@@ -48,7 +48,7 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ### ⚙️ Funcionalidades
 
-- **Login Banco:** `POST` `/banco`
+- **Login Banco:** `POST` `/banco` 
   Endpoint para efetuar o login do Banco Digital.
 - **Criar Conta:**  `POST` `/contas`  
   Endpoint para criar uma nova conta bancária.
