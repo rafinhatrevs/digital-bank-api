@@ -24,40 +24,51 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ###  💻 Estrutura do Projeto
 
-- **bancodedados.js:** Arquivo que contém a estrutura de dados do banco, incluindo informações como nome do banco, número da agência, e as listas de contas, saques, depósitos e transferências.
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
+- **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando pool de conexões.
+- **configs.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
   
 #### controladores/:
 - **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
 - **transacoes.js:** Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
 - **consultas.js:** Controlador para consultas bancárias, como verificar saldo e extrato.
+- **loginBanco.js:** Controlador para login do banco digital.
+- **loginUsuario.js:** Controlador para login de usuários.
   
 #### intermediários/:
-- **autenticacao.js:** Intermediário para autenticar a senha do banco antes de acessar a lista de contas.
-- **validacoes.js:** Intermediário para realizar validações antes de executar operações bancárias.
+- **validacaoBanco.js:** Intermediário para autenticar o login do banco antes de acessar a lista de contas.
+- **validacaoUsuario.js:** Intermediário para autenticar o login do usuário antes de executar operações bancárias.
+- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados.
+
+#### sql/: 
+- **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
 ### ⚙️ Funcionalidades
 
-- **Listar Contas:**  `GET` `/contas?senha_banco=Cubos123Bank`  
-  Endpoint para listar todas as contas bancárias cadastradas.
+- **Login Banco:** `POST` `/banco`  
+  Endpoint para efetuar o login do banco digital.
 - **Criar Conta:**  `POST` `/contas`  
   Endpoint para criar uma nova conta bancária.
-- **Atualizar Conta:**  `PUT` `/contas/:numeroConta/usuario`  
+- **Login Usuário:**  `POST` `/login`  
+  Endpoint para efetuar o login do usuário.
+- **Listar Contas:**  `GET` `/contas`  
+  Endpoint para listar todas as contas bancárias cadastradas.
+- **Atualizar Conta:**  `PUT` `/contas`  
   Endpoint para atualizar informações do usuário de uma conta bancária existente.
-- **Excluir Conta:**  `DELETE` `/contas/:numeroConta`  
+- **Excluir Conta:**  `DELETE` `/contas`  
   Endpoint para excluir uma conta bancária.
-- **Depositar:**  `POST` `/transacoes/depositar`  
+- **Depositar:**  `POST` `/transacoes/deposito`  
   Endpoint para realizar um depósito em uma conta bancária.
-- **Sacar:**  `POST` `/transacoes/sacar`  
+- **Sacar:**  `POST` `/transacoes/saque`  
   Endpoint para realizar um saque de uma conta bancária.
-- **Transferir:**  `POST` `/transacoes/transferir`  
+- **Transferir:**  `POST` `/transacoes/transferencia`  
   Endpoint para realizar uma transferência entre contas.
-- **Conferir Saldo:**  `GET` `/contas/saldo?numero_conta=123&senha=123`  
+- **Saldo:**  `GET` `/contas/saldo`  
   Endpoint para consultar o saldo de uma conta bancária.
-- **Extrato:**  `GET` `/contas/extrato?numero_conta=123&senha=123`  
+- **Extrato:**  `GET` `/contas/extrato`  
   Endpoint para obter o extrato de uma conta bancária.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
@@ -70,6 +81,8 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 1. [Git](https://git-scm.com)
 2. [Node.js](https://nodejs.org/en/)
+3. [PostgreSQL](https://www.postgresql.org/)
+4. [Beekeeper Studio](https://www.beekeeperstudio.io/)
    
 **Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).**
 
@@ -94,69 +107,89 @@ $ npm run dev
 ```
 
 <p align="center">
-  <a href="https://insomnia.rest/run/?label=&uri=https%3A%2F%2Fraw.githubusercontent.com%2Frafinhatrevs%2Fdigital-bank-api-insomnia%2Fmain%2FInsomnia_2024-04-28.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://insomnia.rest/run/?label=&uri=https%3A%2F%2Fraw.githubusercontent.com%2Frafinhatrevs%2Fdigital-bank-api-insomnia%2Fmain%2FInsomnia_2024-06-23.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 #### Exemplos de requisições (Body JSON)
 
 ```javascript
 
+// POST /banco
+{
+	"numero_conta": "123",
+	"senha": "123"
+}
+
+```
+
+```javascript
+
+// POST /login
+{
+	"cpf": "12345678911",
+	"senha": "123456"
+}
+
+```
+
+```javascript
+
 // POST /contas
 {
 	"nome": "nome",
-	"cpf": "01234567890",
-	"data_nascimento": "2020-10-24",
-	"telefone": "71999999999",
-	"email": "nome@email.com",
-	"senha": "123456"
+   	"cpf": "12345678911",
+    	"data_nascimento": "2000-02-02",
+    	"telefone": "99999999999",
+    	"email": "nome@email.com",
+    	"senha": "123456"
 }
 
 ```
 
 ```javascript
 
-// PUT /contas/:numeroConta/usuario
+// PUT /contas
 {
 	"nome": "nome",
-	"cpf": "01234567890",
-	"data_nascimento": "2020-10-24",
-	"telefone": "71999999999",
-	"email": "nome@email.com",
-	"senha": "123456"
+   	"cpf": "12345678911",
+    	"data_nascimento": "2000-02-02",
+    	"telefone": "99999999999",
+    	"email": "nome@email.com",
+    	"senha": "123456"
 }
 
 ```
 
 ```javascript
 
-// POST /transacoes/depositar
+// POST /transacoes/deposito
 {
-	"numero_conta": "2",
-	"valor": 30000,
-	"senha": "123456"
+	"valor": 100000,
+	"numero_conta": 1,
+	"data": "2024-06-17"
 }
 
 ```
 
 ```javascript
 
-// POST /transacoes/sacar
+// POST /transacoes/saque
 {
-	"numero_conta": "2",
+	"valor": 100000,
+	"numero_conta": 1,
+	"data": "2024-06-17"
+}
+
+```
+
+```javascript
+
+// POST /transacoes/transferencia
+{
 	"valor": 10000,
-	"senha": "123456"
-}
-
-```
-
-```javascript
-
-// POST /transacoes/transferir
-{
 	"numero_conta_origem": "1",
 	"numero_conta_destino": "2",
-	"valor": 5000,
-	"senha": "123456"
+	"data": "2024-06-17"
 }
 
 ```
@@ -169,6 +202,10 @@ $ npm run dev
 - **Node.js:** Ambiente de execução JavaScript.
 - **Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
 - **Nodemon:** Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
+- **PostgreSQL:** Sistema de gerenciamento de banco de dados relacional open-source.
+- **Beekeeper Studio:** Ferramenta GUI multiplataforma para gerenciar bancos de dados.
+- **bcrypt:** Função de hashing criptográfico utilizada para armazenar senhas de forma segura em bancos de dados.
+- **jsonwebtoken:** Implementação de tokens JWT (JSON Web Tokens) para autenticação segura entre partes.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
