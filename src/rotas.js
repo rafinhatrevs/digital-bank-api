@@ -25,7 +25,7 @@ rotas.use(validarUsuario);
 rotas.put('/contas', dadosConta, atualizarConta);
 rotas.delete('/contas', excluirConta);
 
-// rotas transferencias
+// rotas transacoes
 rotas.post('/transacoes/deposito', dadosTransacao, depositar);
 rotas.post('/transacoes/saque', dadosTransacao, sacar);
 rotas.post('/transacoes/transferencia', dadosTransferencia, transferir);

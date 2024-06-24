@@ -14,6 +14,7 @@ const loginBanco = async (req, res) => {
         const token = jwt.sign({ isBank: true }, config.jwtSecret, { expiresIn: '1h' });
 
         return res.status(200).json({ token });
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });

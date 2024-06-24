@@ -19,8 +19,9 @@ const depositar = async (req, res) => {
         await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [novoSaldo, numero_conta]);
 
         return res.status(201).send();
+
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };
@@ -37,7 +38,9 @@ const sacar = async (req, res) => {
 
         const conta = rows[0];
 
-        if (conta.id !== req.conta.id) {
+        const idConta = req.conta.id;
+
+        if (conta.id !== idConta) {
             return res.status(401).json({ mensagem: 'Conta não pertence ao usuário logado.' });
         }
 
@@ -48,6 +51,7 @@ const sacar = async (req, res) => {
         await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [novoSaldo, numero_conta]);
 
         return res.status(204).send();
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
@@ -72,7 +76,9 @@ const transferir = async (req, res) => {
             return res.status(404).json({ mensagem: 'Conta não encontrada.' });
         }
 
-        if (contaOrigem.id !== req.conta.id) {
+        const idConta = req.conta.id;
+
+        if (contaOrigem.id !== idConta) {
             return res.status(401).json({ mensagem: 'Conta não pertence ao usuário logado.' });
         }
 
@@ -92,8 +98,9 @@ const transferir = async (req, res) => {
         await pool.query(`UPDATE contas SET saldo = $1 WHERE id = $2`, [saldoDestino, numero_conta_destino]);
 
         return res.status(204).send();
+
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
     }
 };

@@ -8,6 +8,7 @@ const listarContas = async (req, res) => {
         const contas = rows;
 
         return res.status(200).json(contas);
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
@@ -26,10 +27,11 @@ const criarConta = async (req, res) => {
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        await pool.query(`INSERT INTO contas (nome, cpf, data_nascimento, telefone, email, senha)
-        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada]);
+        await pool.query(`INSERT INTO contas (nome, cpf, data_nascimento, telefone, email, senha, saldo)
+        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada, 0]);
 
         return res.status(201).send();
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
@@ -54,6 +56,7 @@ const atualizarConta = async (req, res) => {
             WHERE id = $7`, [nome, cpf, data_nascimento, telefone, email, senhaCriptografada, idConta]);
 
         return res.status(204).send();
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
@@ -76,9 +79,10 @@ const excluirConta = async (req, res) => {
             return res.status(400).json({ mensagem: 'Saldo da conta deve estar zerado!' });
         }
 
-        await pool.query(`DELETE FROM contas WHERE id = $1`, [req.conta.id]);
+        await pool.query(`DELETE FROM contas WHERE id = $1`, [idConta]);
 
         return res.status(204).send();
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });

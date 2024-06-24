@@ -25,6 +25,7 @@ const validarUsuario = async (req, res, next) => {
         req.conta = conta;
 
         next();
+
     } catch (error) {
         //console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });

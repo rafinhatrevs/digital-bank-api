@@ -51,6 +51,7 @@ const extrato = async (req, res) => {
         };
 
         return res.status(200).json(extrato);
+
     } catch (error) {
         //console.log(error)
         return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
