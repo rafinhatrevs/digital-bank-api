@@ -24,22 +24,23 @@ Projeto desenvolvido durante a turma 16 de Desenvolvimento de Software | Back-En
 
 ###  💻 Estrutura do Projeto
 
+#### src/:
 - **index.js:** Arquivo principal da aplicação que configura o servidor Express e as rotas.
 - **rotas.js:** Arquivo que contém as definições das rotas da API.
 - **conexao.js:** Arquivo de configuração da conexão com o banco de dados PostgreSQL utilizando pool de conexões.
 - **configs.js:** Arquivo de configuração que armazena dados sensíveis e de configuração.
   
-#### controladores/:
-- **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
-- **transacoes.js:** Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
-- **consultas.js:** Controlador para consultas bancárias, como verificar saldo e extrato.
-- **loginBanco.js:** Controlador para login do banco digital.
-- **loginUsuario.js:** Controlador para login de usuários.
-  
-#### intermediários/:
-- **validacaoBanco.js:** Intermediário para autenticar o login do banco antes de acessar a lista de contas.
-- **validacaoUsuario.js:** Intermediário para autenticar o login do usuário antes de executar operações bancárias.
-- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados.
+	#### controladores/:
+	- **contas.js:** Controlador responsável por lidar com operações relacionadas às contas bancárias, como listar, criar, atualizar e excluir contas.
+	- **transacoes.js:** Controlador para operações de transações bancárias, incluindo depósitos, saques e transferências.
+	- **consultas.js:** Controlador para consultas bancárias, como verificar saldo e extrato.
+	- **loginBanco.js:** Controlador para login do banco digital.
+	- **loginUsuario.js:** Controlador para login de usuários.
+	  
+	#### intermediários/:
+	- **validacaoBanco.js:** Intermediário para autenticar o login do banco antes de acessar a lista de contas.
+	- **validacaoUsuario.js:** Intermediário para autenticar o login do usuário antes de executar operações bancárias.
+	- **validacaoDados.js:** Intermediário para validação de preenchimento obrigatório de dados.
 
 #### sql/: 
 - **estrutura.sql:** Estrutura do banco de dados e suas tabelas.
@@ -82,7 +83,6 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 1. [Git](https://git-scm.com)
 2. [Node.js](https://nodejs.org/en/)
 3. [PostgreSQL](https://www.postgresql.org/)
-4. [Beekeeper Studio](https://www.beekeeperstudio.io/)
    
 **Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).**
 
@@ -203,7 +203,6 @@ $ npm run dev
 - **Express.js:** Framework web para Node.js utilizado para criar a API RESTful.
 - **Nodemon:** Utilitário que monitora as alterações nos arquivos e reinicia automaticamente o servidor quando necessário.
 - **PostgreSQL:** Sistema de gerenciamento de banco de dados relacional open-source.
-- **Beekeeper Studio:** Ferramenta GUI multiplataforma para gerenciar bancos de dados.
 - **bcrypt:** Função de hashing criptográfico utilizada para armazenar senhas de forma segura em bancos de dados.
 - **jsonwebtoken:** Implementação de tokens JWT (JSON Web Tokens) para autenticação segura entre partes.
 
